@@ -22,9 +22,9 @@ if not members:
 
 members = int(members)
 half = int(members / 2)
-col1, col2 = st.columns(2)
-
 my_dict = {}
+
+col1, col2 = st.columns(2)
 with col1:
     for player in range(1, half + 1):
         name = st.text_input(f":green[Player {player}:]", placeholder=None, key=f'{player}')
@@ -59,5 +59,5 @@ with stack3:
         st.badge("Cleared", icon=":material/check:", color="green")
 
 if randomize:
-    print(my_dict.items())
+    print(my_dict.keys())
 #st.table()
