@@ -1,10 +1,11 @@
 import random
 import pandas as pd
+from typing import List
 
 # Names of participants in fantasy league
 participants = []
 
-def assign_draft_nums(players):
+def assign_draft_nums(players: List[str]):
     # Randomize names list
     names = random.sample(players, k=len(players))
     
@@ -20,7 +21,7 @@ def assign_draft_nums(players):
         draft_order_assignment[name] = random.choice(random_draft_nums)
         random_draft_nums.remove(draft_order_assignment[name])
      
-    # Return dictionary of names and assigned draft numbers   
+    # Return --dict-- of names and assigned draft numbers   
     return draft_order_assignment
         
 Draft_Order = assign_draft_nums(participants)

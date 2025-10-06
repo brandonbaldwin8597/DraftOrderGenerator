@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import functions
 
 
@@ -24,20 +25,21 @@ members = int(members)
 half = int(members / 2)
 my_dict = {}
 
+# Making symmetrical player slots
 col1, col2 = st.columns(2)
 with col1:
     for player in range(1, half + 1):
-        name = st.text_input(f":green[Player {player}:]", placeholder=None, key=f'{player}')
+        name = st.text_input(f"Player {player}", placeholder=None, key=f'{player}')
         if name:
             
             my_dict.update({player: name.strip()})
         
 with col2:
     for player in range(half + 1, members + 1):
-        name = st.text_input(f":green[Player {player}:]", placeholder=None, key=f'{player}')
+        name = st.text_input(f"Player {player}", placeholder=None, key=f'{player}')
         my_dict.update({player: name.strip()})
 
-print(my_dict.values())
+# Button condition
 button = False
 for name in my_dict.values():
     if name == '':
@@ -48,16 +50,25 @@ for name in my_dict.values():
 
 st.divider()
 
+# Instructions and Submit/Clear buttons
 stack1, stack2, stack3 = st.columns(3)
 with stack1:
-    st.write("_All players must be filled in to randomize order_")
+    if button == False:
+        st.write("_All players must be filled in to randomize order_")
+    else:
+        st.write(":green[READY TO CREATE DRAFT ORDER]")
+    
 with stack2:
     if button == True:
-        randomize = st.button("Randomize Order", use_container_width=True)
+        randomize = st.button("Randomize Order", use_container_width=True, type="primary")
+        if randomize:
+            new_dict = functions.assign_draft_nums(list(my_dict.values()))
+            print(new_dict)
+            df = pd.DataFrame.from_dict([my_dict])
+            st.table(df)
+            
 with stack3:
     if st.button("Clear"):
         st.badge("Cleared", icon=":material/check:", color="green")
 
-if randomize:
-    print(my_dict.keys())
 #st.table()
