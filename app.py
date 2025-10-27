@@ -54,7 +54,7 @@ st.divider()
 stack1, stack2, stack3 = st.columns(3)
 with stack1:
     if button == False:
-        st.write("_All players must be filled in to randomize order_")
+        st.write("\*\*\*All player slots must be filled in to create a randomized order")
     else:
         st.write(":green[READY TO CREATE DRAFT ORDER]")
     
@@ -68,7 +68,7 @@ with stack2:
             st.table(df)
             
 with stack3:
-    if st.button("Clear"):
+    if st.button("Clear", on_click=functions.clear_players(members)):
         st.badge("Cleared", icon=":material/check:", color="green")
 
 #st.table()

@@ -1,6 +1,7 @@
 import random
 import pandas as pd
 from typing import List
+import streamlit as st
 
 # Names of participants in fantasy league
 participants = []
@@ -24,10 +25,17 @@ def assign_draft_nums(players: List[str]):
     # Return --dict-- of names and assigned draft numbers   
     return draft_order_assignment
         
-Draft_Order = assign_draft_nums(participants)
+def clear_players(members):
+    for player in range(1, members + 1):
+            if st.session_state[player]:
+                st.session_state[player] = ""
 
-# Make table using a DataFrame
-new = dict(sorted(Draft_Order.items(), key=lambda item: item[1]))
-names = list(new.keys())
-nums = list(new.values())
-table = pd.DataFrame(data={'NAME':names, 'DRAFT NUMBER':nums})
+
+
+## Execute main function
+# Draft_Order = assign_draft_nums(participants)
+## Make table using a DataFrame
+# new = dict(sorted(Draft_Order.items(), key=lambda item: item[1]))
+# names = list(new.keys())
+# nums = list(new.values())
+# table = pd.DataFrame(data={'NAME':names, 'DRAFT NUMBER':nums})
