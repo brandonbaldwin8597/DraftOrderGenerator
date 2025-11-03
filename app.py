@@ -3,6 +3,12 @@ import pandas as pd
 import functions
 
 
+def clear_players(members):
+    for player in range(1, members + 1):
+            if st.session_state[player]:
+                st.session_state[player] = ""
+
+
 ## TITLE
 st.title(":blue[Draft Order Maker]")
 st.divider()
@@ -30,9 +36,7 @@ col1, col2 = st.columns(2)
 with col1:
     for player in range(1, half + 1):
         name = st.text_input(f"Player {player}", placeholder=None, key=f'{player}')
-        if name:
-            
-            my_dict.update({player: name.strip()})
+        my_dict.update({player: name.strip()})
         
 with col2:
     for player in range(half + 1, members + 1):
@@ -67,8 +71,8 @@ with stack2:
             df = pd.DataFrame.from_dict([my_dict])
             st.table(df)
             
-with stack3:
-    if st.button("Clear", on_click=functions.clear_players(members)):
-        st.badge("Cleared", icon=":material/check:", color="green")
+# with stack3:
+#     if st.button("Clear"):
+#         st.badge("Cleared", icon=":material/check:", color="green")
 
 #st.table()
