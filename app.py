@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import functions
 
-
+# Functions
 def clear_players(members):
     for player in range(1, members + 1):
             if st.session_state[player]:
@@ -55,24 +55,16 @@ for name in my_dict.values():
 st.divider()
 
 # Instructions and Submit/Clear buttons
-stack1, stack2, stack3 = st.columns(3)
-with stack1:
-    if button == False:
-        st.write("\*\*\*All player slots must be filled in to create a randomized order")
-    else:
-        st.write(":green[READY TO CREATE DRAFT ORDER]")
+if button == False:
+    st.write("\*\*\*All player slots must be filled in to create a randomized order")
+else:
+    st.write(":green[READY TO CREATE DRAFT ORDER]")
     
-with stack2:
+with st.container():
     if button == True:
-        randomize = st.button("Randomize Order", use_container_width=True, type="primary")
+        randomize = st.button("Randomize Order", use_container_width=True, type="secondary")
         if randomize:
             new_dict = functions.assign_draft_nums(list(my_dict.values()))
             print(new_dict)
             df = pd.DataFrame.from_dict([my_dict])
             st.table(df)
-            
-# with stack3:
-#     if st.button("Clear"):
-#         st.badge("Cleared", icon=":material/check:", color="green")
-
-#st.table()
